@@ -3,16 +3,16 @@
 # Requirements:
 # Accepts a string as an argument
 # Displays Usage: 5-is_the_host_on_the_network {IP_ADDRESS} 
-# if no argument passed
+#  if no argument passed
 # Ping the IP 5 times
 
-if [s# -eq 0]; then
+if [$# -eq 0]; then
     echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
     exit
 
-elif [s# -gt 1]; then
+elif [$# -gt 1]; then
 	echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
 	exit
 else
-	pin "$1" -c 5
+	ping "$1" -c 5
 fi
