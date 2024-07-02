@@ -14,7 +14,7 @@ sudo service nginx start
 
 #Now we are going to make a special web page that says Hello World
 echo "Creating a Hello World page..."
-echo "Hello World" | sudo tee /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 #Now lets restart our Nginx so that it can know about our web page
 echo "Restarting Nginx..."
