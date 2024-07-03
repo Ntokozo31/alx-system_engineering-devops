@@ -1,24 +1,32 @@
 #!/usr/bin/env bash
+# Configures a new ubuntu machine by installing
+# Nginx where it should be listening on port 80
+# Serve a page that would return a Hello World string
+#
 
-#Updating the package list
-echo "Updating package list..."
-sudo apt-get update -y
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+	 sudo apt-get install nginx -y
 
-#Now we are going to install something called Nginx
-echo "Installing Nginx..."
-sudo apt-get install nginx -y
+echo -e "\nSetting up some minor stuff.\n"
 
-#Lets turn on Nginx
-echo "Starting Nginx..."
+# starting nginx service
 sudo service nginx start
 
-#Now we are going to make a special web page that says Hello World
-echo "Creating a Hello World page..."
-echo "Hello World!" | sudo tee /var/www/html/index.html
+# allowing nginx on firewall
+sudo ufw allow 'Nginx HTTP'
 
-#Now lets restart our Nginx so that it can know about our web page
-echo "Restarting Nginx..."
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Backup default index
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# Creating new index
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+# Restarting nginx
 sudo service nginx restart
 
-#We are now saying its all good now you can visit our web page to see Hello World
-echo "Nginx has been installed and configured. You can jump in and see Hello World!"
+echo -e "\nCompleted.\n"
