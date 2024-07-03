@@ -19,13 +19,14 @@ sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 #Backing up index page
-cp /var/www/html/index.ngenx-debain.html /var/www/html/index.ingenx-debian.html.bckp
+sudo mv /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bak
 
 #Creating a new index
-echo -e "Hello World!" > /var/www/html/index.ingenx-debian.html
+echo -e "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
 
 #Setting up /redirect_me to a youtube video
-sudo bash -c 'echo "server {
+udo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+server {
     listen 80;
     listen [::]:80;
     root /var/www/html;
@@ -39,7 +40,9 @@ sudo bash -c 'echo "server {
     location / {
         try_files \$uri \$uri/ =404;
     }
-}" > /etc/nginx/sites-available/default'
+}
+EOF'
+
 
 #Restarting Nginx
 sudo service nginx restart
