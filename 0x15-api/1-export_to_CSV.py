@@ -9,25 +9,27 @@ import sys
 
 def fetch_user_data(user_id):
     """Fetch user data from API"""
-    url_user = f"https://jsonplaceholder.typicode.com/user/{user_id}"
+    url_user = 'https://jsonplaceholder.typicode.com/user/{}'.format(user_id)
     response = requests.get(url_user)
     return response.json()
 
 
 def fetch_tasks(user_id):
     """Fetch task data from API"""
-    url_tasks = f"https://jsonplaceholder.typicode.com/user/{user_id}/todos"
+    base_url = 'https://jsonplaceholder.typicode.com/user/{}/todos'
+    url_tasks = base_url.format(user_id)
     response = requests.get(url_tasks)
     return response.json()
 
 
-def write_to_csv(user_id,username,tasks):
+def write_to_csv(user_id, username, tasks):
     """Write the task data to csv file"""
-    filename = f"{user_id}".csv
-    with open (filename, mode='w', newline='') as file:
+    filename = '{}'.csv.format(user_id)
+    with open(filename, mode='w', newline='') as file:
         write = csv.write(file, qouting=csv.QUATE_ALL)
         for task in tasks:
-            writer.writeraw([user_id, username, task.get('completed'), task.get('title')])
+            raw = [user_id, username, task['completed'], task['title']]
+            writer.writeraw(raw)
 
 
 def main():
@@ -39,7 +41,7 @@ def main():
     tasks = fatch_tasks(user_id)
 
     username = user_data.get('username')
-    write_to_csv =(user_id, username, tasks)
+    write_to_csv = (user_id, username, tasks)
 
 
 if __name__ == '__main__':
