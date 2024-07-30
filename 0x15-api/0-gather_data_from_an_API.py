@@ -18,11 +18,11 @@ def main():
         return
     user_id = int(user_id)
 
-    users_url = f"{REST_API}/users/{user_id}"
+    users_url = "{}/users/{}".format(REST_API, user_id)
     user_response = requests.get(users_url)
     user_data = user_response.json()
 
-    todos_url = f"{REST_API}/todos"
+    todos_url = "{}/todos".format(REST_API)
     todos_response = requests.get(todos_url)
     todos = todos_response.json()
 
