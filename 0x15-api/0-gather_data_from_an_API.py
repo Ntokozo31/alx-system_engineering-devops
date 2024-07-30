@@ -27,12 +27,12 @@ def main():
     todos = todos_response.json()
 
     employee_name = user_data.get('name')
-    user_task = [todo for todo in todos if todo['userId'] == user_id]
-    completed_tasks = [task for task in user_task if task['completed']]
+    user_tasks = [todo for todo in todos if todo['userId'] == user_id]
+    completed_tasks = [task for task in user_tasks if task['completed']]
 
-    print(f"Employee {employee_name} is done with tasks({len(completed_tasks)}/{len(user_tasks)}):")
+    print("Employee {} is done with tasks ({}/{}):" .format(employee_name, len(completed_tasks), len(user_tasks)))
     for task in completed_tasks:
-        print(f"\t {task[title]}")
+        print("\t {}".format(task['title']))
 
 if __name__ == '__main__':
     main()
