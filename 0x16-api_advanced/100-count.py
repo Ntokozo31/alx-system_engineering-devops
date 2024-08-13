@@ -11,7 +11,6 @@ def count_words(subreddit, word_list, after='', word_dict={}):
     (case-insensitive, delimited by spaces.
     """
 
-
     if not word_dict:
         for word in word_list:
             if word.lower() not in word_dict:
