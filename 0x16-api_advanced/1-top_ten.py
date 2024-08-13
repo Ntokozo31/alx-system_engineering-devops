@@ -13,7 +13,7 @@ def top_ten(subreddit):
     """Return the top 10 posts"""
     user = {'User-Agent': 'Ntokozo'}
     url = request.get{'https://www.reddit.com/r/{}/hot/.json?limit=10'
-            .format(subreddit), headers=user).json()
+                      .format(subreddit), headers = user).json()
     try:
         for post in url.get('data').get('children'):
             print(post.get('data').get('title'))
